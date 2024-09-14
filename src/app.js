@@ -1,6 +1,6 @@
 import express from "express";
 import connectDB from "./config/dbConnect.js";
-import genres from "./models/genres.js";
+import routes from "./routes/index.js";
 
 const connection = await connectDB();
 
@@ -13,15 +13,6 @@ connection.once("open", () => {
 })
 
 const app = express();
-app.use(express.json());
-
-app.get("/", (req, res) => {
-    res.status(200).json({status: "ok"});
-});
-
-app.get("/genres", async (req, res) => {
-    const listGenres = await genres.find({});
-    res.status(200).json(listGenres);
-});
+routes(app);
 
 export default app;
