@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
 
-const genreSchema = new mongoose.Schema({
+const engineSchema = new mongoose.Schema({
     id: { type: mongoose.Schema.Types.ObjectId },
     name: { type: String, required: true }
 }, { versionKey: false });
 
-const genre = mongoose.model("genre", genreSchema);
+const engine = mongoose.model("engine", engineSchema);
 
-export { genre, genreSchema };
+export { engine, engineSchema };
