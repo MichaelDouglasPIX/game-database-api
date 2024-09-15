@@ -1,4 +1,4 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 
 const url = process.env.DB_CONNECTION_STRING;
 
