@@ -1,3 +1,4 @@
+import NotFound from "../errors/NotFound.js";
 import { genre } from "../models/Genre.js";
 
 class GenreController {
@@ -27,7 +28,7 @@ class GenreController {
             if(genreFound !== null){
                 res.status(200).json(genreFound);
             }else {
-                res.status(404).json({ message: `genre not found` });
+                next(new NotFound("genre not found"));
             }
         } catch (error) {
             next(error);
@@ -37,8 +38,13 @@ class GenreController {
     static async updateGenreById(req, res, next) {
         try {
             const id = req.params.id;
-            await genre.findByIdAndUpdate(id, req.body);
-            res.status(200).json({ message: `updated genre` });
+            const updatedGenre = await genre.findByIdAndUpdate(id, req.body);
+
+            if(updatedGenre !== null){
+                res.status(200).json({ message: `updated genre` });
+            }else {
+                next(new NotFound("genre not found"));
+            }
         } catch (error) {
             next(error);
         }
@@ -47,8 +53,13 @@ class GenreController {
     static async deleteGenreById(req, res, next) {
         try {
             const id = req.params.id;
-            await genre.findByIdAndDelete(id);
-            res.status(200).json({ message: `deleted genre` });
+            const deletedGenre = await genre.findByIdAndDelete(id);
+
+            if(deletedGenre !== null){
+                res.status(200).json({ message: `deleted genre` });
+            }else {
+                next(new NotFound("genre not found"));
+            }
         } catch (error) {
             next(error);
         }

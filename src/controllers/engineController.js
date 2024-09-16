@@ -1,3 +1,4 @@
+import NotFound from "../errors/NotFound.js";
 import { engine } from "../models/Engine.js";
 
 class EngineController {
@@ -23,7 +24,12 @@ class EngineController {
         try {
             const id = req.params.id;
             const engineFound = await engine.findById(id);
-            res.status(200).json(engineFound);
+
+            if(engineFound !== null){
+                res.status(200).json(engineFound);
+            }else {
+                next(new NotFound("engine not found"));
+            }
         } catch (error) {
             next(error);
         }
@@ -32,8 +38,13 @@ class EngineController {
     static async updateEngineById(req, res, next) {
         try {
             const id = req.params.id;
-            await engine.findByIdAndUpdate(id, req.body);
-            res.status(200).json({ message: `updated engine` });
+            const updatedEngine = await engine.findByIdAndUpdate(id, req.body);
+
+            if(updatedEngine !== null){
+                res.status(200).json({ message: `updated engine` });
+            }else {
+                next(new NotFound("engine not found"));
+            }
         } catch (error) {
             next(error);
         }
@@ -42,8 +53,13 @@ class EngineController {
     static async deleteEngineById(req, res, next) {
         try {
             const id = req.params.id;
-            await engine.findByIdAndDelete(id);
-            res.status(200).json({ message: `deleted engine` });
+            const deletedEngine = await engine.findByIdAndDelete(id);
+
+            if(deletedEngine !== null){
+                res.status(200).json({ message: `deleted engine` });
+            }else {
+                next(new NotFound("engine not found"));
+            }
         } catch (error) {
             next(error);
         }

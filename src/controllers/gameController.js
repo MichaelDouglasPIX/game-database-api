@@ -1,3 +1,4 @@
+import NotFound from "../errors/NotFound.js";
 import game from "../models/Game.js";
 
 class GameController {
@@ -23,7 +24,12 @@ class GameController {
         try {
             const id = req.params.id;
             const gameFound = await game.findById(id).populate("genre engine").exec();
-            res.status(200).json(gameFound);
+
+            if(gameFound !== null){
+                res.status(200).json(gameFound);
+            }else {
+                next(new NotFound("game not found"));
+            }
         } catch (error) {
             next(error);
         }
@@ -32,8 +38,13 @@ class GameController {
     static async updateGameById(req, res, next) {
         try {
             const id = req.params.id;
-            await game.findByIdAndUpdate(id, req.body);
-            res.status(200).json({ message: `updated game` });
+            const updatedGame = await game.findByIdAndUpdate(id, req.body);
+
+            if(updatedGame !== null){
+                res.status(200).json({ message: `updated game` });
+            }else {
+                next(new NotFound("game not found"));
+            }
         } catch (error) {
             next(error);
         }
@@ -42,8 +53,13 @@ class GameController {
     static async deleteGameById(req, res, next) {
         try {
             const id = req.params.id;
-            await game.findByIdAndDelete(id);
-            res.status(200).json({ message: `deleted game` });
+            const deletedGame = await game.findByIdAndDelete(id);
+
+            if(deletedGame !== null){
+                res.status(200).json({ message: `deleted game` });
+            }else {
+                next(new NotFound("game not found"));
+            }
         } catch (error) {
             next(error);
         }

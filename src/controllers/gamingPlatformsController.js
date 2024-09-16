@@ -1,3 +1,4 @@
+import NotFound from "../errors/NotFound.js";
 import gamingPlatforms from "../models/GamingPlatforms.js";
 
 class GamingPlatformsController {
@@ -23,7 +24,12 @@ class GamingPlatformsController {
         try {
             const id = req.params.id;
             const gamingPlatformFound = await gamingPlatforms.findById(id);
-            res.status(200).json(gamingPlatformFound);
+
+            if(gamingPlatformFound !== null){
+                res.status(200).json(gamingPlatformFound);
+            }else {
+                next(new NotFound("gaming platform not found"));
+            }
         } catch (error) {
             next(error);
         }
@@ -32,8 +38,13 @@ class GamingPlatformsController {
     static async updateGamingPlatformById(req, res, next) {
         try {
             const id = req.params.id;
-            await gamingPlatforms.findByIdAndUpdate(id, req.body);
-            res.status(200).json({ message: `updated gaming platform` });
+            const updatedPlataform = await gamingPlatforms.findByIdAndUpdate(id, req.body);
+
+            if(updatedPlataform !== null){
+                res.status(200).json({ message: `updated gaming platform` });
+            }else {
+                next(new NotFound("gaming platform not found"));
+            }
         } catch (error) {
             next(error);
         }
@@ -42,8 +53,13 @@ class GamingPlatformsController {
     static async deleteGamingPlatformById(req, res, next) {
         try {
             const id = req.params.id;
-            await gamingPlatforms.findByIdAndDelete(id);
-            res.status(200).json({ message: `deleted gaming platform` });
+            const deletedPlataform = await gamingPlatforms.findByIdAndDelete(id);
+
+            if(deletedPlataform !== null){
+                res.status(200).json({ message: `deleted gaming platform` });
+            }else {
+                next(new NotFound("gaming platform not found"));
+            }
         } catch (error) {
             next(error);
         }

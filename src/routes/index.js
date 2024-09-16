@@ -7,10 +7,7 @@ import game from "./gameRoutes.js";
 const routes = (app) => {
     app.route("/").get((req, res) => res.status(200).send("Game-Database-Api"));
 
-    app.use(express.json(), genre);
-    app.use(express.json(), gamingPlatforms);
-    app.use(express.json(), engine);
-    app.use(express.json(), game);
+    app.use(express.json(), genre, gamingPlatforms, engine, game);
 };
 
 export default routes;
