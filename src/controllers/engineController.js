@@ -1,5 +1,5 @@
 import NotFound from "../errors/NotFound.js";
-import { engine } from "../models/Engine.js";
+import { engine } from "../models/index.js";
 
 class EngineController {
     static async listEngines(req, res, next) {

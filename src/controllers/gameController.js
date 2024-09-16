@@ -1,5 +1,5 @@
 import NotFound from "../errors/NotFound.js";
-import game from "../models/Game.js";
+import { game } from "../models/index.js";
 
 class GameController {
     static async listGames(req, res, next) {
@@ -25,9 +25,9 @@ class GameController {
             const id = req.params.id;
             const gameFound = await game.findById(id).populate("genre engine").exec();
 
-            if(gameFound !== null){
+            if (gameFound !== null) {
                 res.status(200).json(gameFound);
-            }else {
+            } else {
                 next(new NotFound("game not found"));
             }
         } catch (error) {
@@ -40,9 +40,9 @@ class GameController {
             const id = req.params.id;
             const updatedGame = await game.findByIdAndUpdate(id, req.body);
 
-            if(updatedGame !== null){
+            if (updatedGame !== null) {
                 res.status(200).json({ message: `updated game` });
-            }else {
+            } else {
                 next(new NotFound("game not found"));
             }
         } catch (error) {
@@ -55,9 +55,9 @@ class GameController {
             const id = req.params.id;
             const deletedGame = await game.findByIdAndDelete(id);
 
-            if(deletedGame !== null){
+            if (deletedGame !== null) {
                 res.status(200).json({ message: `deleted game` });
-            }else {
+            } else {
                 next(new NotFound("game not found"));
             }
         } catch (error) {
@@ -68,7 +68,7 @@ class GameController {
     static async listGameByStatus(req, res, next) {
         const status = req.query.status;
         try {
-            const gamesByStatus = await game.find({ status}).populate("genre engine").exec();
+            const gamesByStatus = await game.find({ status }).populate("genre engine").exec();
             res.status(200).json(gamesByStatus);
         } catch (error) {
             next(error);

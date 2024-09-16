@@ -1,5 +1,5 @@
 import NotFound from "../errors/NotFound.js";
-import gamingPlatforms from "../models/GamingPlatforms.js";
+import { gamingPlatforms } from "../models/index.js";
 
 class GamingPlatformsController {
     static async listGamingPlatforms(req, res, next) {

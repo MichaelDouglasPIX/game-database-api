@@ -7,4 +7,4 @@ const engineSchema = new mongoose.Schema({
 
 const engine = mongoose.model("engine", engineSchema);
 
-export { engine, engineSchema };
+export default engine;

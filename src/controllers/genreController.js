@@ -1,5 +1,5 @@
 import NotFound from "../errors/NotFound.js";
-import { genre } from "../models/Genre.js";
+import { genre } from "../models/index.js";
 
 class GenreController {
     static async listGenres(req, res, next) {
