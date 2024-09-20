@@ -1,3 +1,4 @@
+import IncorrectRequest from "../errors/IncorrectRequest.js";
 import NotFound from "../errors/NotFound.js";
 import { game } from "../models/index.js";
 import { engine } from "../models/index.js";
@@ -6,8 +7,17 @@ import { gamingPlatforms } from "../models/index.js";
 class GameController {
     static async listGames(req, res, next) {
         try {
-            const listGames = await game.find({}).populate("genre engine stores.gamingPlatforms").exec();
-            res.status(200).json(listGames);
+            let { limit, page } = req.query;
+
+            limit = parseInt(limit);
+            page = parseInt(page);
+
+            if(limit > 0 && page > 0){
+                const listGames = await game.find({}).skip((page - 1) * limit).limit(limit).populate("genre engine stores.gamingPlatforms").exec();
+                res.status(200).json(listGames);
+            }else {
+                next(new IncorrectRequest());
+            }
         } catch (error) {
             next(error);
         }
