@@ -4,8 +4,9 @@ import { engine } from "../models/index.js";
 class EngineController {
     static async listEngines(req, res, next) {
         try {
-            const listEngines = await engine.find({});
-            res.status(200).json(listEngines);
+            const listEngines = engine.find();
+            req.result = listEngines;
+            next();
         } catch (error) {
             next(error);
         }

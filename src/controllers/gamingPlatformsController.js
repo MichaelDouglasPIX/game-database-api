@@ -4,8 +4,9 @@ import { gamingPlatforms } from "../models/index.js";
 class GamingPlatformsController {
     static async listGamingPlatforms(req, res, next) {
         try {
-            const listGamingPlatforms = await gamingPlatforms.find({});
-            res.status(200).json(listGamingPlatforms);
+            const listGamingPlatforms = gamingPlatforms.find();
+            req.result = listGamingPlatforms;
+            next();
         } catch (error) {
             next(error);
         }

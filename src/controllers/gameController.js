@@ -1,4 +1,3 @@
-import IncorrectRequest from "../errors/IncorrectRequest.js";
 import NotFound from "../errors/NotFound.js";
 import { game } from "../models/index.js";
 import { engine } from "../models/index.js";
@@ -7,17 +6,11 @@ import { gamingPlatforms } from "../models/index.js";
 class GameController {
     static async listGames(req, res, next) {
         try {
-            let { limit, page } = req.query;
+            const searchGames = game.find().populate("genre engine stores.gamingPlatforms");
 
-            limit = parseInt(limit);
-            page = parseInt(page);
+            req.result = searchGames;
 
-            if(limit > 0 && page > 0){
-                const listGames = await game.find({}).skip((page - 1) * limit).limit(limit).populate("genre engine stores.gamingPlatforms").exec();
-                res.status(200).json(listGames);
-            }else {
-                next(new IncorrectRequest());
-            }
+            next();
         } catch (error) {
             next(error);
         }
@@ -82,8 +75,9 @@ class GameController {
             const search = await formatSearch(req.query);
 
             if (search !== null) {
-                const gamesByStatus = await game.find(search).populate("genre engine stores.gamingPlatforms").exec();
-                res.status(200).json(gamesByStatus);
+                const gamesByFilter = game.find(search).populate("genre engine stores.gamingPlatforms");
+                req.result = gamesByFilter;
+                next();
             } else {
                 res.status(200).send([]);
             }

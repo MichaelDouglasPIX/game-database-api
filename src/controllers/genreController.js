@@ -4,8 +4,9 @@ import { genre } from "../models/index.js";
 class GenreController {
     static async listGenres(req, res, next) {
         try {
-            const listGenres = await genre.find({});
-            res.status(200).json(listGenres);
+            const listGenres = genre.find();
+            req.result = listGenres;
+            next();
         } catch (error) {
             next(error);
         }
