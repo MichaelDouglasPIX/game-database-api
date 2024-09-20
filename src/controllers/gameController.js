@@ -6,7 +6,7 @@ import { gamingPlatforms } from "../models/index.js";
 class GameController {
     static async listGames(req, res, next) {
         try {
-            const searchGames = game.find().populate("genre engine stores.gamingPlatforms");
+            const searchGames = game.find();
 
             req.result = searchGames;
 
@@ -28,7 +28,7 @@ class GameController {
     static async listGameById(req, res, next) {
         try {
             const id = req.params.id;
-            const gameFound = await game.findById(id).populate("genre engine stores.gamingPlatforms").exec();
+            const gameFound = await game.findById(id).exec();
 
             if (gameFound !== null) {
                 res.status(200).json(gameFound);
@@ -75,7 +75,7 @@ class GameController {
             const search = await formatSearch(req.query);
 
             if (search !== null) {
-                const gamesByFilter = game.find(search).populate("genre engine stores.gamingPlatforms");
+                const gamesByFilter = game.find(search);
                 req.result = gamesByFilter;
                 next();
             } else {
@@ -94,6 +94,16 @@ async function formatSearch(params) {
 
     if (status) search.status = { $regex: status, $options: "i" };
     if (title) search.title = { $regex: title, $options: "i" };
+
+    if (platform) {
+        const platformFound = await gamingPlatforms.findOne({ platform });
+
+        if (platformFound !== null) {
+            search['stores.gamingPlatforms'] = platformFound._id;
+        } else {
+            search = null;
+        }
+    }
 
     if (engineName) {
         const engineFound = await engine.findOne({ name: engineName });
