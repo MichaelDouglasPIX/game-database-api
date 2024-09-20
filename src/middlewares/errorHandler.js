@@ -5,6 +5,7 @@ import ValidationError from "../errors/ValidationError.js";
 import NotFound from "../errors/NotFound.js";
 
 function errorHandler(error, req, res, next) {
+    console.error("Error:", error);
     if (error instanceof mongoose.Error.CastError) {
         new IncorrectRequest().send(res);
     } else if (error instanceof mongoose.Error.ValidationError) {
