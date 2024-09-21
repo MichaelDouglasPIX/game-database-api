@@ -1,11 +1,11 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const url = process.env.DB_CONNECTION_STRING;
 
 async function connectDB() {
-    mongoose.connect(url);
+  mongoose.connect(url);
 
-    return mongoose.connection;
+  return mongoose.connection;
 }
 
 export default connectDB;

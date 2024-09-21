@@ -8,6 +8,9 @@
     "start-docker": "docker-compose up -d",
     "finish-docker": "docker-compose down -v",
     "dev": "nodemon server.js",
+    "format": "prettier --write .",
+    "lint": "eslint . ",
+    "lint:fix": "eslint . --fix ",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -24,6 +27,7 @@
   "devDependencies": {
     "@eslint/js": "^9.10.0",
     "eslint": "^9.10.0",
-    "globals": "^15.9.0"
+    "globals": "^15.9.0",
+    "prettier": "^3.3.3"
   }
 }

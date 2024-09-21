@@ -1,10 +1,13 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
-const genreSchema = new mongoose.Schema({
+const genreSchema = new mongoose.Schema(
+  {
     id: { type: mongoose.Schema.Types.ObjectId },
-    name: { type: String, required: [true, "name is mandatory"] }
-}, { versionKey: false });
+    name: { type: String, required: [true, 'name is mandatory'] }
+  },
+  { versionKey: false }
+);
 
-const genre = mongoose.model("genre", genreSchema);
+const genre = mongoose.model('genre', genreSchema);
 
 export default genre;

@@ -1,10 +1,13 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
-const engineSchema = new mongoose.Schema({
+const engineSchema = new mongoose.Schema(
+  {
     id: { type: mongoose.Schema.Types.ObjectId },
-    name: { type: String, required: [true, "name is mandatory"] }
-}, { versionKey: false });
+    name: { type: String, required: [true, 'name is mandatory'] }
+  },
+  { versionKey: false }
+);
 
-const engine = mongoose.model("engine", engineSchema);
+const engine = mongoose.model('engine', engineSchema);
 
 export default engine;
