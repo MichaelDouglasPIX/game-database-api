@@ -5,7 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "docker-start": "docker compose up",
+    "start-docker": "docker-compose up -d",
+    "finish-docker": "docker-compose down",
     "dev": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
