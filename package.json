@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start-docker": "docker-compose up -d",
-    "finish-docker": "docker-compose down",
+    "finish-docker": "docker-compose down -v",
     "dev": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
