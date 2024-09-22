@@ -1,0 +1,1262 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Game Database API",
+    "description": "API responsible for recording and making information available about developed games. Enabling the consumption of information by the front-end, and allowing the centralization of information in one place.",
+    "contact": {
+      "name": "Developer",
+      "email": "michaeldouglas_sl@hotmail.com"
+    },
+    "version": "0.0.1"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Local test"
+    }
+  ],
+  "paths": {
+    "/genres": {
+      "get": {
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/LimitParam"
+          },
+          {
+            "$ref": "#/components/parameters/PageParam"
+          },
+          {
+            "$ref": "#/components/parameters/OrderingParam"
+          }
+        ],
+        "summary": "Search all registered game genres",
+        "tags": [
+          "Genres"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Genre"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new genre",
+        "tags": [
+          "Genres"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "genre": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "_id": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Required field not provided",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RequiredField"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/genres/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "schema": {
+            "type": "string"
+          },
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Search for a genre by ID",
+        "tags": [
+          "Genres"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Genre"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Incorrect data reported",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IncorrectData"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Genre not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFound"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a genre by ID",
+        "tags": [
+          "Genres"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "updated genre"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Incorrect data reported",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IncorrectData"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Genre not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFound"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete genre by ID",
+        "tags": [
+          "Genres"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "deleted genre"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Incorrect data reported",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IncorrectData"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Genre not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFound"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/engine": {
+      "get": {
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/LimitParam"
+          },
+          {
+            "$ref": "#/components/parameters/PageParam"
+          },
+          {
+            "$ref": "#/components/parameters/OrderingParam"
+          }
+        ],
+        "summary": "Search all development engines",
+        "tags": [
+          "Engine"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Engine"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Register a new engine",
+        "tags": [
+          "Engine"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "engine": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "_id": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Required field not provided",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RequiredField"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/engine/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "schema": {
+            "type": "string"
+          },
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Search engine by ID",
+        "tags": [
+          "Engine"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Engine"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Incorrect data reported",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IncorrectData"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Engine not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFound"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update engine by ID",
+        "tags": [
+          "Engine"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "updated engine"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Incorrect data reported",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IncorrectData"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Engine not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFound"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete engine by ID",
+        "tags": [
+          "Engine"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "deleted engine"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Incorrect data reported",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IncorrectData"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Engine not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFound"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gaming-platforms": {
+      "get": {
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/LimitParam"
+          },
+          {
+            "$ref": "#/components/parameters/PageParam"
+          },
+          {
+            "$ref": "#/components/parameters/OrderingParam"
+          }
+        ],
+        "summary": "Search all gaming platforms",
+        "tags": [
+          "Gaming Platforms"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Gaming-platform"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Register a new gaming platform",
+        "tags": [
+          "Gaming Platforms"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "platform": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "gamingPlatform": {
+                      "type": "object",
+                      "properties": {
+                        "platform": {
+                          "type": "string"
+                        },
+                        "_id": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Required field not provided",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RequiredField"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gaming-platforms/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "schema": {
+            "type": "string"
+          },
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Search game platform by ID",
+        "tags": [
+          "Gaming Platforms"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Gaming-platform"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Incorrect data reported",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IncorrectData"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Gaming platform not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFound"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update game platform by ID",
+        "tags": [
+          "Gaming Platforms"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "platform": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "gaming platform"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Incorrect data reported",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IncorrectData"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Gaming platform not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFound"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete game platform by ID",
+        "tags": [
+          "Gaming Platforms"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "deleted gaming platform"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Incorrect data reported",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IncorrectData"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Gaming platform not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFound"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/game": {
+      "get": {
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/LimitParam"
+          },
+          {
+            "$ref": "#/components/parameters/PageParam"
+          },
+          {
+            "$ref": "#/components/parameters/OrderingParam"
+          }
+        ],
+        "summary": "Search all games",
+        "tags": [
+          "Games"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Game"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Register a new game",
+        "tags": [
+          "Games"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Game"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegisteredGame"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Required field not provided",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RequiredField"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/game/search": {
+      "get": {
+        "summary": "Search games with filter",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/LimitParam"
+          },
+          {
+            "$ref": "#/components/parameters/PageParam"
+          },
+          {
+            "$ref": "#/components/parameters/OrderingParam"
+          },
+          {
+            "name": "status",
+            "description": "filter by status",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "title",
+            "description": "filter by title",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "engineName",
+            "description": "filter by engine name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "platform",
+            "description": "filter by platform",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "tags": [
+          "Games"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GameRegistrationResult"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Incorrect data reported",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IncorrectData"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Game not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFound"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/game/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "schema": {
+            "type": "string"
+          },
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Search game by ID",
+        "tags": [
+          "Games"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameRegistrationResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Incorrect data reported",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IncorrectData"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Game not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFound"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update game by ID",
+        "tags": [
+          "Games"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Game"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "updated game"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Incorrect data reported",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IncorrectData"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Game not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFound"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete game by ID",
+        "tags": [
+          "Games"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "deleted game"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Incorrect data reported",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IncorrectData"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Game not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFound"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Genre": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "Engine": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "Gaming-platform": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "platform": {
+            "type": "string"
+          }
+        }
+      },
+      "Game": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "genre": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "status": {
+            "type": "string"
+          },
+          "releaseDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "engine": {
+            "type": "string"
+          },
+          "stores": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string"
+                },
+                "gamingPlatforms": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "images": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "GameRegistrationResult": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "genre": {
+            "type": "object",
+            "properties": {
+              "_id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              }
+            }
+          },
+          "status": {
+            "type": "string"
+          },
+          "releaseDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "engine": {
+            "type": "object",
+            "properties": {
+              "_id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              }
+            }
+          },
+          "stores": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string"
+                },
+                "gamingPlatforms": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string"
+                    },
+                    "platform": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "images": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "RegisteredGame": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "game": {
+            "$ref": "#/components/schemas/GameRegistrationResult"
+          }
+        }
+      },
+      "NotFound": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "status": {
+            "type": "integer",
+            "example": 404
+          }
+        }
+      },
+      "IncorrectData": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "one or more data provided is incorrect."
+          },
+          "status": {
+            "type": "integer",
+            "example": 400
+          }
+        }
+      },
+      "RequiredField": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "status": {
+            "type": "integer",
+            "example": 400
+          }
+        }
+      }
+    },
+    "parameters": {
+      "LimitParam": {
+        "name": "limit",
+        "description": "amount of data returned",
+        "in": "query",
+        "schema": {
+          "type": "integer",
+          "example": 5
+        }
+      },
+      "PageParam": {
+        "name": "page",
+        "description": "page number",
+        "in": "query",
+        "schema": {
+          "type": "integer",
+          "example": 1
+        }
+      },
+      "OrderingParam": {
+        "name": "ordering",
+        "description": "field and data sort type",
+        "in": "query",
+        "schema": {
+          "type": "string",
+          "example": "_id:-1"
+        }
+      }
+    }
+  }
+}

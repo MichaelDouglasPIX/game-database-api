@@ -6,7 +6,7 @@ services:
     ports:
       - 27017:27017
     volumes:
-      - ./mongodb/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - ./docker/mongodb/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
       - mongodb-data:/data/db/
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
@@ -27,6 +27,16 @@ services:
       - 8081:8081
     depends_on:
       - mongodb
+
+  swagger-ui:
+    image: swaggerapi/swagger-ui
+    container_name: swagger-ui
+    ports:
+      - 8082:8080
+    volumes:
+      - ./docker/swagger/openapi.json:/openapi.json
+    environment:
+      SWAGGER_JSON: /openapi.json
 
 volumes:
   mongodb-data:

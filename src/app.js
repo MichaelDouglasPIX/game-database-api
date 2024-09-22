@@ -3,6 +3,7 @@ import connectDB from './config/dbConnect.js';
 import routes from './routes/index.js';
 import errorHandler from './middlewares/errorHandler.js';
 import error404Handler from './middlewares/error404Handler.js';
+import cors from 'cors';
 
 const connection = await connectDB();
 
@@ -15,6 +16,7 @@ connection.once('open', () => {
 });
 
 const app = express();
+app.use(cors());
 routes(app);
 
 app.use(error404Handler);
