@@ -16,7 +16,8 @@
 - [Swagger](https://swagger.io/docs/specification/basic-structure/)
 
 ## Prerequisites
-To run the project, you must install the following tools on your machine:
+> [!WARNING]
+> To run the project, you must install the following tools on your machine:
 - [Node.js](https://nodejs.org/en): v18 or higher.
 - [Docker](https://docs.docker.com/get-started/)
 
