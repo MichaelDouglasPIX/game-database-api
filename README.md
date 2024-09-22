@@ -1,9 +1,9 @@
 
-# <center>🎮 Game Database API</center>
+<h1 align="center">🎮 Game Database API</h1>
 
-<center>Rest API project to record and make data available about developed games.</center>
-
-&nbsp;&nbsp;&nbsp;
+<p align="center">
+  Rest API project to record and make data available about developed games.
+</p>
 
 <p align="center">
   <img src="docs/data_modeling.png" width="500"/>
