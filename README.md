@@ -38,8 +38,8 @@
   </tr>
   <tr>
     <td>
-      <a href="https://swagger.io/docs/specification/basic-structure/" style="border-radius: 100px;">
-        <img src="https://seeklogo.com/images/S/swaggerhub-logo-52BE4455D6-seeklogo.com.png" alt="Swagger" style="width:47;border-radius:10px;" />
+      <a href="https://swagger.io/docs/specification/basic-structure/">
+        <img src="https://seeklogo.com/images/S/swaggerhub-logo-52BE4455D6-seeklogo.com.png" alt="Swagger" style="width:47px;border-radius:10px;" />
       </a>
     </td>
     <td><a href="https://swagger.io/docs/specification/basic-structure/" target="_blank" >Swagger</a></td>
