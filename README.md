@@ -13,44 +13,44 @@
 
 <table border="0">
   <tr>
-    <td href="https://nodejs.org/en">
-      <a href="https://nodejs.org/en">
-        <img src="https://skillicons.dev/icons?i=nodejs" alt="Node.js" />
+    <td>
+      <a href="https://nodejs.org/en" target="_blank">
+        <img src="https://skillicons.dev/icons?i=nodejs" alt="Node.js"/>
       </a>
     </td>
-    <td style="border:none"><a href="https://nodejs.org/en" target="_blank" >Node.js</a></td>
+    <td style="border:none"><a href="https://nodejs.org/en" target="_blank">Node.js</a></td>
   </tr>
   <tr>
     <td>
-      <a href="https://expressjs.com/pt-br/">
-        <img src="https://skillicons.dev/icons?i=express" alt="Express" />
+      <a href="https://expressjs.com/pt-br/" target="_blank">
+        <img src="https://skillicons.dev/icons?i=express" alt="Express"/>
       </a>
     </td>
-    <td><a href="https://expressjs.com/pt-br/" target="_blank" >Express</a></td>
+    <td><a href="https://expressjs.com/pt-br/" target="_blank">Express</a></td>
   </tr>
   <tr>
     <td>
-      <a href="https://www.mongodb.com/pt-br/docs/manual/">
-        <img src="https://skillicons.dev/icons?i=mongodb" alt="Mongodb" />
+      <a href="https://www.mongodb.com/pt-br/docs/manual/" target="_blank">
+        <img src="https://skillicons.dev/icons?i=mongodb" alt="Mongodb"/>
       </a>
     </td>
-    <td><a href="https://www.mongodb.com/pt-br/docs/manual/" target="_blank" >Mongodb</a></td>
+    <td><a href="https://www.mongodb.com/pt-br/docs/manual/" target="_blank">Mongodb</a></td>
   </tr>
   <tr>
     <td>
-      <a href="https://swagger.io/docs/specification/basic-structure/">
-        <img src="https://seeklogo.com/images/S/swaggerhub-logo-52BE4455D6-seeklogo.com.png" alt="Swagger" style="width:47px;border-radius:10px;" />
+      <a href="https://swagger.io/docs/specification/basic-structure/" target="_blank">
+        <img src="https://seeklogo.com/images/S/swaggerhub-logo-52BE4455D6-seeklogo.com.png" alt="Swagger" style="width:47px;border-radius:10px;"/>
       </a>
     </td>
-    <td><a href="https://swagger.io/docs/specification/basic-structure/" target="_blank" >Swagger</a></td>
+    <td><a href="https://swagger.io/docs/specification/basic-structure/" target="_blank">Swagger</a></td>
   </tr>
   <tr>
     <td>
-      <a href="https://docs.docker.com/get-started/">
+      <a href="https://docs.docker.com/get-started/" target="_blank">
         <img src="https://skillicons.dev/icons?i=docker" alt="Docker" />
       </a>
     </td>
-    <td><a href="https://docs.docker.com/get-started/" target="_blank" >Docker</a></td>
+    <td><a href="https://docs.docker.com/get-started/" target="_blank">Docker</a></td>
   </tr>
 </table>
 
